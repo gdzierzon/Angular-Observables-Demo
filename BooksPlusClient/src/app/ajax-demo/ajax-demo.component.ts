@@ -9,7 +9,7 @@ import {AjaxService} from '../services/ajax.service';
   styleUrls: ['./ajax-demo.component.less']
 })
 export class AjaxDemoComponent implements OnInit {
-
+  page = 0;
   books: Book[] = [];
 
   settings: AppSettings;
@@ -20,9 +20,24 @@ export class AjaxDemoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClick() {
+  onPrev()
+  {
+    if (this.page > 0)
+    {
+      this.page = this.page - 1;
+      this.getBooks();
+    }
+  }
 
-    const url = `${this.settings.booksApi.baseUrl}${this.settings.booksApi.books}`;
+  onNext() {
+
+    this.page = this.page + 1;
+    this.getBooks();
+  }
+
+  getBooks()
+  {
+    const url = `${this.settings.booksApi.baseUrl}${this.settings.booksApi.books}/${this.page}`;
 
     this.ajaxService.getBooks(url, (err, books: Book[]) => {
       if (err) { throw err; }

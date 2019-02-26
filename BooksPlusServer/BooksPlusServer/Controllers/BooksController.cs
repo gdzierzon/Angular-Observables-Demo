@@ -19,15 +19,20 @@ namespace BooksPlusServer.Controllers
         {
             _context = context;
         }
-
-        // GET: api/Books
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        
+        // GET: api/Books/2
+        [HttpGet("{page}")]
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooks(int? page)
         {
             IEnumerable<Book> books;
             try
             {
-                books = await _context.Books.Take(10).ToListAsync();
+                var skip = 0;
+                if (page.HasValue && page.Value > 0)
+                {
+                    skip = (page.Value - 1) * 5;
+                }
+                books = await _context.Books.Skip(skip).Take(5).ToListAsync();
             }
             catch (Exception e)
             {
@@ -36,20 +41,6 @@ namespace BooksPlusServer.Controllers
             }
 
             return new ActionResult<IEnumerable<Book>>(books);
-        }
-
-        // GET: api/Books/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(int id)
-        {
-            var book = await _context.Books.FindAsync(id);
-
-            if (book == null)
-            {
-                return NotFound();
-            }
-
-            return book;
         }
 
         // PUT: api/Books/5

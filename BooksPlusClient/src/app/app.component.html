@@ -1,4 +1,15 @@
+<mat-toolbar color="accent" class="navigation">
+      <a [routerLink]="['/']"><img src="../assets/logo.svg" height="50" alt="Books Plus Logo" class="logo"></a>
+      <div class="navigation-links">
+        <a [routerLink]="['/ajax']">AJAX</a> |
+        <a [routerLink]="['/promises']">Promises</a> |
+        <a [routerLink]="['/async']">Async/Await</a> |
+        <a [routerLink]="['/observable']">Observables</a>
+        <header-cart></header-cart>
+      </div>
 
-this is the homepage
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

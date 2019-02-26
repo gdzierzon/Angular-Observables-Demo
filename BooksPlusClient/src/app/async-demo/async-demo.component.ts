@@ -9,7 +9,7 @@ import {AsyncService} from '../services/async.service';
   styleUrls: ['./async-demo.component.less']
 })
 export class AsyncDemoComponent implements OnInit {
-
+  page = 0;
   books: Book[] = [];
 
   settings: AppSettings;
@@ -20,9 +20,25 @@ export class AsyncDemoComponent implements OnInit {
   ngOnInit() {
   }
 
-  async onClick()
+  onPrev()
   {
-    const url = `${this.settings.booksApi.baseUrl}${this.settings.booksApi.books}`;
+    if (this.page > 0)
+    {
+      this.page = this.page - 1;
+      this.getBooks();
+    }
+  }
+
+  onNext() {
+
+    this.page = this.page + 1;
+    this.getBooks();
+  }
+
+
+  async getBooks()
+  {
+    const url = `${this.settings.booksApi.baseUrl}${this.settings.booksApi.books}/${this.page}`;
 
     try {
       this.books = await this.service.getBooks(url);

@@ -9,7 +9,7 @@ import {PromisesService} from '../services/promises.service';
   styleUrls: ['./promise-demo.component.less']
 })
 export class PromiseDemoComponent implements OnInit {
-
+  page = 0;
   books: Book[] = [];
 
   settings: AppSettings;
@@ -20,9 +20,25 @@ export class PromiseDemoComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClick()
+  onPrev()
   {
-    const url = `${this.settings.booksApi.baseUrl}${this.settings.booksApi.books}`;
+    if (this.page > 0)
+    {
+      this.page = this.page - 1;
+      this.getBooks();
+    }
+  }
+
+  onNext() {
+
+    this.page = this.page + 1;
+    this.getBooks();
+  }
+
+
+  getBooks()
+  {
+    const url = `${this.settings.booksApi.baseUrl}${this.settings.booksApi.books}/${this.page}`;
 
     this.service.getBooks(url)
       .then(books =>

@@ -8,6 +8,9 @@ import { AjaxDemoComponent } from './ajax-demo/ajax-demo.component';
 import { AsyncDemoComponent } from './async-demo/async-demo.component';
 import { ObservableDemoComponent } from './observable-demo/observable-demo.component';
 import { HttpClientModule} from '@angular/common/http';
+import { MaterialModule } from './material.module';
+import { ShoppingCartService } from './services/shopping-cart.service';
+import { HeaderCartComponent } from './header-cart/header-cart.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +18,18 @@ import { HttpClientModule} from '@angular/common/http';
     PromiseDemoComponent,
     AjaxDemoComponent,
     AsyncDemoComponent,
-    ObservableDemoComponent
+    ObservableDemoComponent,
+    HeaderCartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
-  providers: [],
+  providers: [
+    ShoppingCartService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AjaxDemoComponent} from './ajax-demo/ajax-demo.component';
+import { HeaderCartComponent} from './header-cart/header-cart.component';
 
 @Component({
   selector: 'app-root',
