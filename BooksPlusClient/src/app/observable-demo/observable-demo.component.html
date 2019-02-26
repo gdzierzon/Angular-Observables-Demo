@@ -1,0 +1,12 @@
+<h1>OBSERVABLE Demo</h1>
+<button (click)="onClick()">Load Books</button>
+
+<div class="card-container" *ngIf="books.length > 0">
+  <div *ngFor="let book of books" class="card-padding">
+    <div class="card">
+      <h4>{{book.title}}</h4>
+      <div>{{book.price | currency}}</div>
+      <div>{{book.publishDate | date}}</div>
+    </div>
+  </div>
+</div>
